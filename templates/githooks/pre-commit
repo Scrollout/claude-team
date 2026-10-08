@@ -1,0 +1,8 @@
+#!/bin/sh
+# Snippet for .githooks/pre-commit (or append to your hook). Enable the .githooks directory once per clone.
+# Set ORBIT_DIR to the plugin checkout (default ~/orbit). Skipped silently without node or a bundle.
+ORBIT_DIR="${ORBIT_DIR:-$HOME/orbit}"
+BUNDLE="$(sed -n 's/.*"bundle"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' .agents/okf.json 2>/dev/null)"
+if command -v node >/dev/null 2>&1 && [ -d "${BUNDLE:-docs/okf}" ]; then
+  node "$ORBIT_DIR/scripts/validate-okf.mjs" --root . || exit 1
+fi

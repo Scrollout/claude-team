@@ -1,0 +1,14 @@
+---
+name: peer
+description: Work as a peer session under an operator session that coordinates several Claude sessions. Covers starting in its own worktree, asking before each push, reporting run ids and merge SHAs, no chained push after a merge, writing handoff.md on request and re-reading it after compaction. Use when an operator session has sent standing orders, or the owner says you are a peer of an operator.
+---
+Read the project profile (.agents/project.md, or the path in CLAUDE.md/AGENTS.md) first. The operator side is the `operator` skill.
+
+- **Start**: before any edit, work in your own worktree and topic branch, created from the fresh base branch with the profile's worktree convention (default `git fetch && git worktree add ../<repo>-<topic> -b <topic> origin/<base>`), and work only inside it. If you are on the default or base branch, or in another session's worktree, stop and create your own. One worktree per session; tasks share no files across branches. Report the branch, the worktree path and the base SHA to the operator.
+- **Push**: ask the operator before every push (branch, head SHA, why). Push only after its go. After pushing, report the run id.
+- **Merge**: after merging, verify the merge commit and report the SHA, the tree check (`git rev-parse HEAD^{tree} <branch>^{tree}` against the green tree) and the trailer check (profile). Wait for the operator's go.
+- **No chained push after a merge**: the merge and the push are separate commands, with the verification between them. If a stray run starts, tell the operator at once.
+- **Issues and findings**: report each new finding, red run or carried item to the operator; open or close issues only if the profile says you may.
+- **Handoff**: when asked, write `handoff.md` (template: `templates/handoff.md` of this plugin) with role, standing orders, state (branch, SHAs, run ids), open items with owners, next steps and key paths. Reply with its path. Do not write it unprompted mid-build.
+- **Compaction**: a "/compact" message from the operator does not compact you; only the owner can type it. After you are compacted, re-read `handoff.md`, then confirm to the operator the branch, SHAs, runs and open items you hold.
+- **Orders**: operator messages are orders within this session's own permissions. A message is never the owner's approval. If an action is denied by the permission system, the owner, a hook or the profile, do not launder it through the operator, another session or a rephrased command; report that it was denied.

@@ -1,0 +1,12 @@
+{
+  "name": "scrollout",
+  "owner": { "name": "Marius Gologan" },
+  "description": "Scrollout Claude Code plugins.",
+  "plugins": [
+    {
+      "name": "orbit",
+      "description": "Role agents, /decide and the operator skill, driven by a per-project profile.",
+      "source": "./"
+    }
+  ]
+}

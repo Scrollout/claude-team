@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Orbit logo">
+  <circle cx="60" cy="60" r="40" fill="none" stroke="#151823" stroke-width="5" opacity="0.35"/>
+  <circle cx="60" cy="60" r="13" fill="#12A594"/>
+  <circle cx="60" cy="20" r="9" fill="#151823"/>
+  <circle cx="94.6" cy="80" r="9" fill="#151823"/>
+  <circle cx="25.4" cy="80" r="9" fill="#151823"/>
+</svg>

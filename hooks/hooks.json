@@ -1,0 +1,17 @@
+{
+  "description": "After Write/Edit under the OKF bundle, run validate-okf; silent when there is no bundle or no node",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PLUGIN_ROOT}/hooks/okf-check.sh\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
